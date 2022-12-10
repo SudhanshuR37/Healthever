@@ -118,7 +118,7 @@ export default function Registration() {
         <ScrollView>
           <Image
             style={styles.logo}
-            source={require("../assets/logo-hospital.png")}
+            source={require("../assets/favicon.png")}
           />
           <Form
             initialValues={{
@@ -135,21 +135,13 @@ export default function Registration() {
           >
             <FormImagePicker name="images" />
             <ErrorMessage error={error} />
-            <FormField
-              maxLength={255}
-              name="name"
-              placeholder="Hospital Name"
-            />
-            <FormField
-              maxLength={255}
-              name="email"
-              placeholder="Hospital Email"
-            />
+            <FormField maxLength={255} name="name" placeholder="Name" />
+            <FormField maxLength={255} name="email" placeholder="Email" />
             <FormField
               keyboardType="numeric"
               maxLength={10}
               name="Contact_No"
-              placeholder="Hospital Contact No."
+              placeholder="Contact No."
             />
             <Picker
               items={categories}
@@ -158,14 +150,10 @@ export default function Registration() {
               PickerItemComponent={CategoryPickerItem}
             />
 
-            <FormField
-              multiline
-              name="Address"
-              placeholder="Hospital Address"
-            />
+            <FormField multiline name="Address" placeholder="Address" />
             <FormField
               name="password"
-              placeholder="Hospital Password"
+              placeholder="Password"
               secureTextEntry={true}
             />
             <SubmitButton title="Register" />
