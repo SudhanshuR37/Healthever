@@ -1,4 +1,4 @@
-import React from "react";
+import React, { cloneElement, useEffect, useState } from "react";
 import { View, Text, Image, ImageBackground, StyleSheet } from "react-native";
 import {
   TextInput,
@@ -11,8 +11,49 @@ import Entypo from "react-native-vector-icons/Entypo";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import Feather from "react-native-vector-icons/Feather";
+import useAuth from "../auth/useAuth";
+import Firebase from "../config/firebase";
+// import ActivityIndicator from "../components/ActivityIndicator";
+// import AuthNavigator from "../Navigator/AuthNavigator";
 
 const Home = ({ navigation }) => {
+  // const [appointments, setAppointments] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  // const { logout, userData } = useAuth();
+  // const { name, Images } = userData;
+  const { userData, logout } = useAuth();
+  // const db = Firebase.firestore();
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   db.collection("hospitals")
+  //     .doc(userData.id)
+  //     .collection("NewAppointments")
+  //     .onSnapshot((snapshot) => {
+  //       setAppointments(
+  //         snapshot.docs.map((doc) => ({
+  //           id: doc.id,
+  //           contact_no: doc.data().contact_no,
+  //           disease: doc.data().disease,
+  //           email: doc.data().email,
+  //           name: doc.data().name,
+  //           image: doc.data().Image,
+  //         }))
+  //       );
+  //     });
+
+  //   setLoading(false);
+  // }, []);
+
+  // const signOutUser = async () => {
+  //   try {
+  //     await Firebase.auth().signOut();
+  //     navigation.navigate("Login");
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
   return (
     <View
       style={{
@@ -29,14 +70,14 @@ const Home = ({ navigation }) => {
           paddingHorizontal: 20,
         }}
       >
-        <Image
-          // source={require("../images/1.png")}
+        {/* <Image
+          source={{ uri: userData.Images[0] }}
           style={{
             height: 10,
             width: 20,
             marginTop: 50,
           }}
-        />
+        /> */}
         <View
           style={{
             flexDirection: "row",
@@ -53,14 +94,25 @@ const Home = ({ navigation }) => {
                 fontWeight: "bold",
               }}
             >
-              Hey, Jullia
+              Hey, {userData.name}
             </Text>
           </View>
           <View style={{ width: "50%", alignItems: "flex-end" }}>
-            <Image
+            <TouchableOpacity>
+              <Image
+                source={{ uri: userData.Images[0] }}
+                style={{
+                  height: 60,
+                  width: 60,
+                  marginTop: 25,
+                  borderRadius: 50,
+                }}
+              />
+            </TouchableOpacity>
+            {/* <Image
               // source={require("../images/g.png")}
               style={{ height: 60, width: 60 }}
-            />
+            /> */}
           </View>
         </View>
       </View>
@@ -131,6 +183,7 @@ const Home = ({ navigation }) => {
           paddingHorizontal: 20,
           width: "100%",
           alignItems: "center",
+          marginTop: 20,
         }}
       >
         <View style={{ width: "50%" }}>
@@ -910,7 +963,11 @@ const Home = ({ navigation }) => {
               </Text>
             </View>
             <View
-              style={{ backgroundColor: "#000", borderRadius: 5, padding: 5 }}
+              style={{
+                backgroundColor: "#000",
+                borderRadius: 5,
+                padding: 5,
+              }}
             >
               <Text
                 style={{
@@ -977,7 +1034,11 @@ const Home = ({ navigation }) => {
               </Text>
             </View>
             <View
-              style={{ backgroundColor: "#000", borderRadius: 5, padding: 5 }}
+              style={{
+                backgroundColor: "#000",
+                borderRadius: 5,
+                padding: 5,
+              }}
             >
               <Text
                 style={{
@@ -1044,7 +1105,11 @@ const Home = ({ navigation }) => {
               </Text>
             </View>
             <View
-              style={{ backgroundColor: "#000", borderRadius: 5, padding: 5 }}
+              style={{
+                backgroundColor: "#000",
+                borderRadius: 5,
+                padding: 5,
+              }}
             >
               <Text
                 style={{
@@ -1153,3 +1218,16 @@ const styles = StyleSheet.create({
 });
 
 export default Home;
+
+// import { StyleSheet, Text, View } from "react-native";
+// import React from "react";
+
+// export default function HomeScreen() {
+//   return (
+//     <View>
+//       <Text>HomeScreen</Text>
+//     </View>
+//   );
+// }
+
+// const styles = StyleSheet.create({});
