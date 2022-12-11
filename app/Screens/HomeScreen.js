@@ -13,37 +13,42 @@ import Fontisto from "react-native-vector-icons/Fontisto";
 import Feather from "react-native-vector-icons/Feather";
 import useAuth from "../auth/useAuth";
 import Firebase from "../config/firebase";
+import ActivityIndicator from "../components/ActivityIndicator";
+import TouchableCard from "../components/TouchableCard";
+import Screen from "../components/Screen";
+// import AppText from "./AppText";
 // import ActivityIndicator from "../components/ActivityIndicator";
 // import AuthNavigator from "../Navigator/AuthNavigator";
 
 const Home = ({ navigation }) => {
-  // const [appointments, setAppointments] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  // const { logout, userData } = useAuth();
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { logout, userData } = useAuth();
   // const { name, Images } = userData;
-  const { userData, logout } = useAuth();
-  // const db = Firebase.firestore();
+  // const { userData } = useAuth();
+  const db = Firebase.firestore();
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   db.collection("hospitals")
-  //     .doc(userData.id)
-  //     .collection("NewAppointments")
-  //     .onSnapshot((snapshot) => {
-  //       setAppointments(
-  //         snapshot.docs.map((doc) => ({
-  //           id: doc.id,
-  //           contact_no: doc.data().contact_no,
-  //           disease: doc.data().disease,
-  //           email: doc.data().email,
-  //           name: doc.data().name,
-  //           image: doc.data().Image,
-  //         }))
-  //       );
-  //     });
+  useEffect(() => {
+    // setLoading(true);
+    db.collection("hospitals")
+      .doc(userData.id)
+      .collection("Appointments")
+      .onSnapshot((snapshot) => {
+        setAppointments(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            name: doc.data().Name,
+            contact_no: doc.data().contact_No,
+            specialisation: doc.data().Specialisation,
+            date: doc.data().Date,
+            time: doc.data().Time,
+            // image: doc.data().Image,
+          }))
+        );
+      });
 
-  //   setLoading(false);
-  // }, []);
+    // setLoading(false);
+  }, []);
 
   // const signOutUser = async () => {
   //   try {
@@ -98,7 +103,7 @@ const Home = ({ navigation }) => {
             </Text>
           </View>
           <View style={{ width: "50%", alignItems: "flex-end" }}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => logout()}>
               <Image
                 source={{ uri: userData.Images[0] }}
                 style={{
@@ -244,7 +249,7 @@ const Home = ({ navigation }) => {
           }}
         /> */}
         <TouchableOpacity
-          onPress={() => navigation.navigate("Detail")}
+          onPress={() => navigation.navigate("ConsultationBooking")}
           style={{
             height: 100,
             elevation: 2,
@@ -493,7 +498,29 @@ const Home = ({ navigation }) => {
         showsHorizontalScrollIndicator={false}
         style={{ marginBottom: -100 }}
       >
-        <TouchableOpacity
+        {appointments.length ? (
+          appointments.map((Appointment) => (
+            <TouchableCard
+              key={Appointment.id}
+              //   id={Appointment.id}
+              //   image={Appointment.image}
+              name={Appointment.name}
+              contact_no={Appointment.contact_no}
+              specialisation={Appointment.specialisation}
+              date={Appointment.date}
+              time={Appointment.time}
+              navigation={navigation}
+              //   email={Appointment.email}
+              //   disease={Appointment.disease}
+              //   phone_no={Appointment.contact_no}
+              //   navigation={navigation}
+            />
+          ))
+        ) : (
+          <Text style={styles.text}>No Appointment found</Text>
+        )}
+
+        {/* <TouchableOpacity
           onPress={() => navigation.navigate("Detail")}
           style={{
             height: 100,
@@ -507,7 +534,6 @@ const Home = ({ navigation }) => {
             flexDirection: "row",
           }}
         >
-          {/* <Image source={require("../images/6.png")} /> */}
           <Image
             source={require("../assets/doctor.png")}
             style={{
@@ -517,26 +543,12 @@ const Home = ({ navigation }) => {
               marginHorizontal: 20,
             }}
           />
-          {/* <View
-            style={{
-              alignItems: "center",
-              paddingHorizontal: 20,
-            }}
-          >
-            <Fontisto
-              style={styles.searchIcon}
-              name="laboratory"
-              size={20}
-              color="#000"
-            />
-          </View> */}
           <View
             style={{
               flex: 1,
               flexDirection: "column",
               paddingTop: 10,
               paddingHorizontal: 10,
-              // justifyContent: "flex-start",
             }}
           >
             <Text
@@ -599,18 +611,8 @@ const Home = ({ navigation }) => {
               </View>
             </View>
           </View>
-          {/* <Text
-            style={{
-              paddingHorizontal: 10,
-              fontWeight: "bold",
-              color: "#b1e5d3",
-              paddingTop: 3,
-            }}
-          >
-            RUSSIA
-          </Text> */}
-        </TouchableOpacity>
-        <TouchableOpacity
+        </TouchableOpacity> */}
+        {/* <TouchableOpacity
           onPress={() => navigation.navigate("Detail")}
           style={{
             height: 100,
@@ -624,7 +626,6 @@ const Home = ({ navigation }) => {
             flexDirection: "row",
           }}
         >
-          {/* <Image source={require("../images/6.png")} /> */}
           <Image
             source={require("../assets/doctor.png")}
             style={{
@@ -634,26 +635,13 @@ const Home = ({ navigation }) => {
               marginHorizontal: 20,
             }}
           />
-          {/* <View
-            style={{
-              alignItems: "center",
-              paddingHorizontal: 20,
-            }}
-          >
-            <Fontisto
-              style={styles.searchIcon}
-              name="laboratory"
-              size={20}
-              color="#000"
-            />
-          </View> */}
+          
           <View
             style={{
               flex: 1,
               flexDirection: "column",
               paddingTop: 10,
               paddingHorizontal: 10,
-              // justifyContent: "flex-start",
             }}
           >
             <Text
@@ -716,134 +704,7 @@ const Home = ({ navigation }) => {
               </View>
             </View>
           </View>
-          {/* <Text
-            style={{
-              paddingHorizontal: 10,
-              fontWeight: "bold",
-              color: "#b1e5d3",
-              paddingTop: 3,
-            }}
-          >
-            RUSSIA
-          </Text> */}
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Detail")}
-          style={{
-            height: 100,
-            elevation: 2,
-            backgroundColor: "#FFF",
-            marginLeft: 20,
-            marginTop: 10,
-            borderRadius: 15,
-            marginBottom: 10,
-            width: 370,
-            flexDirection: "row",
-          }}
-        >
-          {/* <Image source={require("../images/6.png")} /> */}
-          <Image
-            source={require("../assets/doctor.png")}
-            style={{
-              height: 70,
-              width: 70,
-              marginTop: 20,
-              marginHorizontal: 20,
-            }}
-          />
-          {/* <View
-            style={{
-              alignItems: "center",
-              paddingHorizontal: 20,
-            }}
-          >
-            <Fontisto
-              style={styles.searchIcon}
-              name="laboratory"
-              size={20}
-              color="#000"
-            />
-          </View> */}
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "column",
-              paddingTop: 10,
-              paddingHorizontal: 10,
-              // justifyContent: "flex-start",
-            }}
-          >
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 20,
-              }}
-            >
-              Dr. Albert Flores
-            </Text>
-            <Text
-              style={{
-                fontWeight: "bold",
-                color: "#00a46c",
-                paddingLeft: 35,
-              }}
-            >
-              Cardiologist
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 10,
-                justifyContent: "space-between",
-              }}
-            >
-              <View
-                style={{
-                  height: 20,
-                  width: 80,
-                  backgroundColor: "#000",
-                  flexDirection: "row",
-                  borderRadius: 5,
-                }}
-              >
-                <Entypo
-                  style={{ padding: 2 }}
-                  name="calendar"
-                  size={15}
-                  color="#FFF"
-                />
-                <Text style={{ paddingLeft: 7, color: "#FFF" }}>17 Aug</Text>
-              </View>
-              <View
-                style={{
-                  height: 20,
-                  width: 80,
-                  backgroundColor: "#000",
-                  flexDirection: "row",
-                  borderRadius: 5,
-                }}
-              >
-                <Fontisto
-                  style={{ padding: 2 }}
-                  name="clock"
-                  size={15}
-                  color="#FFF"
-                />
-                <Text style={{ paddingLeft: 7, color: "#FFF" }}>14:30</Text>
-              </View>
-            </View>
-          </View>
-          {/* <Text
-            style={{
-              paddingHorizontal: 10,
-              fontWeight: "bold",
-              color: "#b1e5d3",
-              paddingTop: 3,
-            }}
-          >
-            RUSSIA
-          </Text> */}
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         {/* <Image
           // source={require("../images/18.png")}
           style={{ marginTop: 20, marginHorizontal: 20 }}
@@ -1136,7 +997,7 @@ const Home = ({ navigation }) => {
           justifyContent: "space-between",
         }}
       >
-        <TouchableOpacity onPress={() => navigation.navigate("Detail")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <View style={{ padding: 10 }}>
             <Ionicons
               style={{ padding: 2 }}
@@ -1147,7 +1008,9 @@ const Home = ({ navigation }) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Detail")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("ConsultationBooking")}
+        >
           <View style={{ padding: 10 }}>
             <Feather
               style={{ padding: 2 }}
@@ -1158,7 +1021,9 @@ const Home = ({ navigation }) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Detail")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("MedicineDelivery")}
+        >
           <View style={{ padding: 10 }}>
             <Feather
               style={{ padding: 2 }}
@@ -1169,7 +1034,7 @@ const Home = ({ navigation }) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Detail")}>
+        <TouchableOpacity onPress={() => navigation.navigate("LabTests")}>
           <View style={{ padding: 10 }}>
             <Fontisto
               style={{ padding: 2 }}
@@ -1180,7 +1045,7 @@ const Home = ({ navigation }) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Detail")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
           <View style={{ padding: 10 }}>
             <Ionicons
               style={{ padding: 2 }}

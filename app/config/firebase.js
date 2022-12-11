@@ -16,6 +16,7 @@ const firebaseConfig = {
 };
 
 let Firebase = firebase.initializeApp(firebaseConfig);
+let i = 1;
 
 export const firestore = firebase.firestore();
 
@@ -56,6 +57,55 @@ export const createHospitalProfile = async (
     }
   }
 
+  return userRef;
+};
+
+//create hospital
+export const createAppointment = async (
+  userID,
+  // Images,
+  // additionalData
+  name,
+  Contact_No,
+  specialisation,
+  date,
+  time
+) => {
+  if (!userID) return;
+
+  const userRef = firestore.doc(
+    `hospitals/${userID}/Appointments/appointment${i}`
+  );
+  const snapshot = await userRef.get();
+  // let newImages = [];
+
+  // for (let i = 0; i < Images.length; i++) {
+  //   let response = await fetch(Images[i]);
+  //   let blob = await response.blob();
+  //   let ref = Firebase.storage().ref().child(`hospitals/${Date.now()}`);
+  //   await ref.put(blob);
+  //   let link = await ref.getDownloadURL();
+  //   newImages.push(link);
+  // }
+
+  // if (!snapshot.exists) {
+  // const { email } = HospitalAuth;
+  // const createdAt = new Date();
+
+  try {
+    await userRef.set({
+      Name: name,
+      contact_No: Contact_No,
+      Specialisation: specialisation,
+      Date: date,
+      Time: time,
+      // ...additionalData
+    });
+  } catch (err) {
+    console.log("Error while creating User ", error.message);
+  }
+  // }
+  i += 1;
   return userRef;
 };
 
