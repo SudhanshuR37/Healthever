@@ -53,36 +53,23 @@ export default function ConsultationBooking({ navigation }) {
           appointments.map((Appointment) => (
             <Card
               key={Appointment.id}
-              //   id={Appointment.id}
-              //   image={Appointment.image}
               name={Appointment.name}
               contact_no={Appointment.contact_no}
               specialisation={Appointment.specialisation}
               date={Appointment.date}
               time={Appointment.time}
-              //   email={Appointment.email}
-              //   disease={Appointment.disease}
-              //   phone_no={Appointment.contact_no}
-              //   navigation={navigation}
             />
           ))
         ) : (
           <AppText style={styles.text}>No Appointment found</AppText>
         )}
       </ScrollView>
-      {/* <TouchableOpacity
-        onPress={() => navigation.navigate("Profile")}
-        style={styles.profileButton}
-      >
-        <AntDesign name="user" size={30} color="white" />
-      </TouchableOpacity> */}
       <View
         style={{
           height: 50,
           elevation: 2,
           backgroundColor: "#fff",
           marginLeft: 20,
-          // marginTop: 10,
           borderRadius: 15,
           marginBottom: 10,
           width: 370,

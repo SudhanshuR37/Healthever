@@ -16,16 +16,11 @@ import Firebase from "../config/firebase";
 import ActivityIndicator from "../components/ActivityIndicator";
 import TouchableCard from "../components/TouchableCard";
 import Screen from "../components/Screen";
-// import AppText from "./AppText";
-// import ActivityIndicator from "../components/ActivityIndicator";
-// import AuthNavigator from "../Navigator/AuthNavigator";
 
 const Home = ({ navigation }) => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(false);
   const { logout, userData } = useAuth();
-  // const { name, Images } = userData;
-  // const { userData } = useAuth();
   const db = Firebase.firestore();
 
   useEffect(() => {
@@ -50,15 +45,6 @@ const Home = ({ navigation }) => {
     // setLoading(false);
   }, []);
 
-  // const signOutUser = async () => {
-  //   try {
-  //     await Firebase.auth().signOut();
-  //     navigation.navigate("Login");
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
   return (
     <View
       style={{
@@ -68,21 +54,11 @@ const Home = ({ navigation }) => {
     >
       <View
         style={{
-          // backgroundColor: "#ff6600",
-          // height: "23%",
           borderBottomLeftRadius: 20,
           borderBottomRightRadius: 20,
           paddingHorizontal: 20,
         }}
       >
-        {/* <Image
-          source={{ uri: userData.Images[0] }}
-          style={{
-            height: 10,
-            width: 20,
-            marginTop: 50,
-          }}
-        /> */}
         <View
           style={{
             flexDirection: "row",
@@ -114,22 +90,9 @@ const Home = ({ navigation }) => {
                 }}
               />
             </TouchableOpacity>
-            {/* <Image
-              // source={require("../images/g.png")}
-              style={{ height: 60, width: 60 }}
-            /> */}
           </View>
         </View>
       </View>
-      {/* <LinearGradient
-        colors={["rgba(0,164,109,0.4)", "transparent"]}
-        style={{
-          left: 0,
-          right: 0,
-          height: 90,
-          marginTop: -45,
-        }}
-      > */}
       <View
         style={{
           backgroundColor: "#FFF",
@@ -158,29 +121,7 @@ const Home = ({ navigation }) => {
           size={20}
           color="#000"
         />
-        {/* <Image
-            source={require("../assets/favicon.png")}
-            style={{ height: 20, width: 20 }}
-          /> */}
       </View>
-
-      {/* <View style={styles.searchSection}>
-          <Icon
-            style={styles.searchIcon}
-            name="ios-search"
-            size={20}
-            color="#000"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="User Nickname"
-            onChangeText={(searchString) => {
-              this.setState({ searchString });
-            }}
-            underlineColorAndroid="transparent"
-          />
-        </View> */}
-      {/* </LinearGradient> */}
 
       <View
         style={{
@@ -201,35 +142,7 @@ const Home = ({ navigation }) => {
           >
             Services
           </Text>
-          {/* <View
-            style={{
-              height: 4,
-              backgroundColor: "#b1e5d3",
-              width: 115,
-              marginTop: -5,
-            }}
-          ></View> */}
         </View>
-        {/* <View style={{ width: "50%", alignItems: "flex-end" }}>
-          <View
-            style={{
-              backgroundColor: "#00a46c",
-              paddingHorizontal: 20,
-              paddingVertical: 5,
-              borderRadius: 15,
-            }}
-          >
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 13,
-                color: "#FFF",
-              }}
-            >
-              More
-            </Text>
-          </View>
-        </View> */}
       </View>
 
       <ScrollView
@@ -237,17 +150,6 @@ const Home = ({ navigation }) => {
         showsHorizontalScrollIndicator={false}
         style={{ height: 1 }}
       >
-        {/* <LinearGradient
-          colors={["rgba(0,164,109,0.09)", "transparent"]}
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            height: 50,
-            marginTop: 220,
-            top: 0,
-          }}
-        /> */}
         <TouchableOpacity
           onPress={() => navigation.navigate("ConsultationBooking")}
           style={{
@@ -261,7 +163,6 @@ const Home = ({ navigation }) => {
             width: 160,
           }}
         >
-          {/* <Image source={require("../images/4.png")} /> */}
           <View
             style={{
               alignItems: "center",
@@ -291,26 +192,7 @@ const Home = ({ navigation }) => {
             >
               Consultations
             </Text>
-            {/* <Text
-              style={{
-                fontWeight: "bold",
-                color: "#00a46c",
-                paddingLeft: 35,
-              }}
-            >
-              $400
-            </Text> */}
           </View>
-          {/* <Text
-            style={{
-              paddingHorizontal: 10,
-              fontWeight: "bold",
-              color: "#b1e5d3",
-              paddingTop: 3,
-            }}
-          >
-            RUSSIA
-          </Text> */}
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -326,7 +208,6 @@ const Home = ({ navigation }) => {
             width: 160,
           }}
         >
-          {/* <Image source={require("../images/4.png")} /> */}
           <View
             style={{
               alignItems: "center",
@@ -356,26 +237,7 @@ const Home = ({ navigation }) => {
             >
               Medicines
             </Text>
-            {/* <Text
-              style={{
-                fontWeight: "bold",
-                color: "#00a46c",
-                paddingLeft: 35,
-              }}
-            >
-              $400
-            </Text> */}
           </View>
-          {/* <Text
-            style={{
-              paddingHorizontal: 10,
-              fontWeight: "bold",
-              color: "#b1e5d3",
-              paddingTop: 3,
-            }}
-          >
-            RUSSIA
-          </Text> */}
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -391,7 +253,6 @@ const Home = ({ navigation }) => {
             width: 160,
           }}
         >
-          {/* <Image source={require("../images/4.png")} /> */}
           <View
             style={{
               alignItems: "center",
@@ -421,26 +282,7 @@ const Home = ({ navigation }) => {
             >
               Laboratories
             </Text>
-            {/* <Text
-              style={{
-                fontWeight: "bold",
-                color: "#00a46c",
-                paddingLeft: 35,
-              }}
-            >
-              $400
-            </Text> */}
           </View>
-          {/* <Text
-            style={{
-              paddingHorizontal: 10,
-              fontWeight: "bold",
-              color: "#b1e5d3",
-              paddingTop: 3,
-            }}
-          >
-            RUSSIA
-          </Text> */}
         </TouchableOpacity>
       </ScrollView>
 
@@ -450,7 +292,6 @@ const Home = ({ navigation }) => {
           paddingHorizontal: 20,
           width: "100%",
           alignItems: "center",
-          // marginTop: -80,
         }}
       >
         <View>
@@ -463,35 +304,7 @@ const Home = ({ navigation }) => {
           >
             Upcoming Appointments
           </Text>
-          {/* <View
-            style={{
-              height: 4,
-              backgroundColor: "#b1e5d3",
-              width: 115,
-              marginTop: -5,
-            }}
-          ></View> */}
         </View>
-        {/* <View style={{ width: "50%", alignItems: "flex-end" }}>
-          <View
-            style={{
-              backgroundColor: "#00a46c",
-              paddingHorizontal: 20,
-              paddingVertical: 5,
-              borderRadius: 15,
-            }}
-          >
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 13,
-                color: "#FFF",
-              }}
-            >
-              More
-            </Text>
-          </View>
-        </View> */}
       </View>
       <ScrollView
         horizontal
@@ -502,217 +315,17 @@ const Home = ({ navigation }) => {
           appointments.map((Appointment) => (
             <TouchableCard
               key={Appointment.id}
-              //   id={Appointment.id}
-              //   image={Appointment.image}
               name={Appointment.name}
               contact_no={Appointment.contact_no}
               specialisation={Appointment.specialisation}
               date={Appointment.date}
               time={Appointment.time}
               navigation={navigation}
-              //   email={Appointment.email}
-              //   disease={Appointment.disease}
-              //   phone_no={Appointment.contact_no}
-              //   navigation={navigation}
             />
           ))
         ) : (
           <Text style={styles.text}>No Appointment found</Text>
         )}
-
-        {/* <TouchableOpacity
-          onPress={() => navigation.navigate("Detail")}
-          style={{
-            height: 100,
-            elevation: 2,
-            backgroundColor: "#FFF",
-            marginLeft: 20,
-            marginTop: 10,
-            borderRadius: 15,
-            marginBottom: 10,
-            width: 370,
-            flexDirection: "row",
-          }}
-        >
-          <Image
-            source={require("../assets/doctor.png")}
-            style={{
-              height: 70,
-              width: 70,
-              marginTop: 20,
-              marginHorizontal: 20,
-            }}
-          />
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "column",
-              paddingTop: 10,
-              paddingHorizontal: 10,
-            }}
-          >
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 20,
-              }}
-            >
-              Dr. Albert Flores
-            </Text>
-            <Text
-              style={{
-                fontWeight: "bold",
-                color: "#00a46c",
-                paddingLeft: 35,
-              }}
-            >
-              Cardiologist
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 10,
-                justifyContent: "space-between",
-              }}
-            >
-              <View
-                style={{
-                  height: 20,
-                  width: 80,
-                  backgroundColor: "#000",
-                  flexDirection: "row",
-                  borderRadius: 5,
-                }}
-              >
-                <Entypo
-                  style={{ padding: 2 }}
-                  name="calendar"
-                  size={15}
-                  color="#FFF"
-                />
-                <Text style={{ paddingLeft: 7, color: "#FFF" }}>17 Aug</Text>
-              </View>
-              <View
-                style={{
-                  height: 20,
-                  width: 80,
-                  backgroundColor: "#000",
-                  flexDirection: "row",
-                  borderRadius: 5,
-                }}
-              >
-                <Fontisto
-                  style={{ padding: 2 }}
-                  name="clock"
-                  size={15}
-                  color="#FFF"
-                />
-                <Text style={{ paddingLeft: 7, color: "#FFF" }}>14:30</Text>
-              </View>
-            </View>
-          </View>
-        </TouchableOpacity> */}
-        {/* <TouchableOpacity
-          onPress={() => navigation.navigate("Detail")}
-          style={{
-            height: 100,
-            elevation: 2,
-            backgroundColor: "#FFF",
-            marginLeft: 20,
-            marginTop: 10,
-            borderRadius: 15,
-            marginBottom: 10,
-            width: 370,
-            flexDirection: "row",
-          }}
-        >
-          <Image
-            source={require("../assets/doctor.png")}
-            style={{
-              height: 70,
-              width: 70,
-              marginTop: 20,
-              marginHorizontal: 20,
-            }}
-          />
-          
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "column",
-              paddingTop: 10,
-              paddingHorizontal: 10,
-            }}
-          >
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 20,
-              }}
-            >
-              Dr. Albert Flores
-            </Text>
-            <Text
-              style={{
-                fontWeight: "bold",
-                color: "#00a46c",
-                paddingLeft: 35,
-              }}
-            >
-              Cardiologist
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 10,
-                justifyContent: "space-between",
-              }}
-            >
-              <View
-                style={{
-                  height: 20,
-                  width: 80,
-                  backgroundColor: "#000",
-                  flexDirection: "row",
-                  borderRadius: 5,
-                }}
-              >
-                <Entypo
-                  style={{ padding: 2 }}
-                  name="calendar"
-                  size={15}
-                  color="#FFF"
-                />
-                <Text style={{ paddingLeft: 7, color: "#FFF" }}>17 Aug</Text>
-              </View>
-              <View
-                style={{
-                  height: 20,
-                  width: 80,
-                  backgroundColor: "#000",
-                  flexDirection: "row",
-                  borderRadius: 5,
-                }}
-              >
-                <Fontisto
-                  style={{ padding: 2 }}
-                  name="clock"
-                  size={15}
-                  color="#FFF"
-                />
-                <Text style={{ paddingLeft: 7, color: "#FFF" }}>14:30</Text>
-              </View>
-            </View>
-          </View>
-        </TouchableOpacity> */}
-        {/* <Image
-          // source={require("../images/18.png")}
-          style={{ marginTop: 20, marginHorizontal: 20 }}
-        />
-        <Image
-          // source={require("../images/19.png")}
-          style={{ marginTop: 20, borderRadius: 10 }}
-        /> */}
       </ScrollView>
 
       <View
@@ -721,7 +334,6 @@ const Home = ({ navigation }) => {
           paddingHorizontal: 20,
           width: "100%",
           alignItems: "center",
-          // marginTop: -80,
         }}
       >
         <View>
@@ -734,35 +346,7 @@ const Home = ({ navigation }) => {
           >
             Discounts
           </Text>
-          {/* <View
-            style={{
-              height: 4,
-              backgroundColor: "#b1e5d3",
-              width: 115,
-              marginTop: -5,
-            }}
-          ></View> */}
         </View>
-        {/* <View style={{ width: "50%", alignItems: "flex-end" }}>
-          <View
-            style={{
-              backgroundColor: "#00a46c",
-              paddingHorizontal: 20,
-              paddingVertical: 5,
-              borderRadius: 15,
-            }}
-          >
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 13,
-                color: "#FFF",
-              }}
-            >
-              More
-            </Text>
-          </View>
-        </View> */}
       </View>
       <ScrollView
         horizontal
@@ -1083,16 +667,3 @@ const styles = StyleSheet.create({
 });
 
 export default Home;
-
-// import { StyleSheet, Text, View } from "react-native";
-// import React from "react";
-
-// export default function HomeScreen() {
-//   return (
-//     <View>
-//       <Text>HomeScreen</Text>
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({});

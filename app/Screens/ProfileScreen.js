@@ -27,60 +27,10 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import Feather from "react-native-vector-icons/Feather";
 
-// const categories = [
-//   {
-//     label: "karad",
-//     value: 1,
-//   },
-//   {
-//     label: "Satara",
-//     value: 2,
-//   },
-//   {
-//     label: "Phaltan",
-//     value: 3,
-//   },
-//   {
-//     label: "Patan",
-//     value: 4,
-//   },
-//   {
-//     label: "Khatav",
-//     value: 5,
-//   },
-//   {
-//     label: "Koregoan",
-//     value: 6,
-//   },
-//   {
-//     label: "Man",
-//     value: 8,
-//   },
-//   {
-//     label: "Wai",
-//     value: 9,
-//   },
-//   {
-//     label: "Khandala",
-//     value: 10,
-//   },
-//   {
-//     label: "Jaoli",
-//     value: 11,
-//   },
-//   {
-//     label: "Mahabaleshwar",
-//     value: 12,
-//   },
-// ];
-
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().min(1).label("Name"),
   Contact_No: Yup.number().required().min(10).label("Contact no."),
   specialisation: Yup.string().required().label("Specialisation"),
-  //   Taluka: Yup.object().required().nullable().label("Taluka"),
-  //   images: Yup.array().min(1, "Please Select Atleast on Image"),
-  //   password: Yup.string().required().min(4).label("Password"),
   date: Yup.string().required().label("Date"),
   time: Yup.string().required().label("Time"),
 });
@@ -88,7 +38,6 @@ const validationSchema = Yup.object().shape({
 export default function ProfileScreen({ navigation }) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  //   const db = Firebase.firestore();
 
   const { userData, logout } = useAuth();
 
@@ -102,10 +51,6 @@ export default function ProfileScreen({ navigation }) {
   }) => {
     try {
       setLoading(true);
-      //   const { user } = await Firebase.auth().createUserWithEmailAndPassword(
-      //     email,
-      //     password
-      //   );
       await createAppointment(
         userData.id,
         name,
@@ -114,7 +59,6 @@ export default function ProfileScreen({ navigation }) {
         date,
         time
       );
-      //   auth.logIn(user);
       setLoading(false);
     } catch (error) {
       setError("An unexprected error occured");
@@ -129,27 +73,19 @@ export default function ProfileScreen({ navigation }) {
       <ActivityIndicator visible={loading} />
       <Screen style={styles.container}>
         <ScrollView>
-          {/* <Image
-            style={styles.logo}
-            source={require("../assets/favicon.png")}
-          /> */}
           <Form
             initialValues={{
               name: "",
               Contact_No: "",
               Specialisation: "",
-              //   Taluka: null,
-              //   images: [],
               date: "",
               time: "",
             }}
             onSubmit={HandleSubmit}
             validationSchema={validationSchema}
           >
-            {/* <FormImagePicker name="images" /> */}
             <ErrorMessage error={error} />
             <FormField maxLength={255} name="name" placeholder="Name" />
-            {/* <FormField maxLength={255} name="email" placeholder="Email" /> */}
             <FormField
               keyboardType="numeric"
               maxLength={10}
@@ -163,19 +99,6 @@ export default function ProfileScreen({ navigation }) {
             />
             <FormField maxLength={255} name="date" placeholder="Date" />
             <FormField maxLength={255} name="time" placeholder="Time" />
-            {/* <Picker
-              items={categories}
-              name="Taluka"
-              placeholder="Taluka"
-              PickerItemComponent={CategoryPickerItem}
-            /> */}
-
-            {/* <FormField multiline name="Address" placeholder="Address" /> */}
-            {/* <FormField
-              name="password"
-              placeholder="Password"
-              secureTextEntry={true}
-            /> */}
             <SubmitButton title="Add Appointment" />
             <Button title={"Logout"} onPress={() => logout()}></Button>
           </Form>
@@ -186,7 +109,6 @@ export default function ProfileScreen({ navigation }) {
             elevation: 2,
             backgroundColor: "#fff",
             marginLeft: 20,
-            // marginTop: 10,
             borderRadius: 15,
             marginBottom: 10,
             width: 370,

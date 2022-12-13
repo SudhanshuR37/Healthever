@@ -10,7 +10,6 @@ export default function TouchableCard({
   specialisation,
   date,
   time,
-  //   id,
   navigation,
 }) {
   return (
@@ -28,7 +27,6 @@ export default function TouchableCard({
         flexDirection: "row",
       }}
     >
-      {/* <Image source={require("../images/6.png")} /> */}
       <Image
         source={require("../assets/doctor.png")}
         style={{
@@ -38,19 +36,6 @@ export default function TouchableCard({
           marginHorizontal: 20,
         }}
       />
-      {/* <View
-            style={{
-              alignItems: "center",
-              paddingHorizontal: 20,
-            }}
-          >
-            <Fontisto
-              style={styles.searchIcon}
-              name="laboratory"
-              size={20}
-              color="#000"
-            />
-          </View> */}
       <View
         style={{
           flex: 1,
@@ -120,16 +105,6 @@ export default function TouchableCard({
           </View>
         </View>
       </View>
-      {/* <Text
-            style={{
-              paddingHorizontal: 10,
-              fontWeight: "bold",
-              color: "#b1e5d3",
-              paddingTop: 3,
-            }}
-          >
-            RUSSIA
-          </Text> */}
     </TouchableOpacity>
   );
 }

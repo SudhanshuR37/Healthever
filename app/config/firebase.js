@@ -20,7 +20,7 @@ let i = 1;
 
 export const firestore = firebase.firestore();
 
-//create hospital
+//create user
 export const createHospitalProfile = async (
   HospitalAuth,
   Images,
@@ -60,11 +60,9 @@ export const createHospitalProfile = async (
   return userRef;
 };
 
-//create hospital
+//create appointment
 export const createAppointment = async (
   userID,
-  // Images,
-  // additionalData
   name,
   Contact_No,
   specialisation,
@@ -77,20 +75,6 @@ export const createAppointment = async (
     `hospitals/${userID}/Appointments/appointment${i}`
   );
   const snapshot = await userRef.get();
-  // let newImages = [];
-
-  // for (let i = 0; i < Images.length; i++) {
-  //   let response = await fetch(Images[i]);
-  //   let blob = await response.blob();
-  //   let ref = Firebase.storage().ref().child(`hospitals/${Date.now()}`);
-  //   await ref.put(blob);
-  //   let link = await ref.getDownloadURL();
-  //   newImages.push(link);
-  // }
-
-  // if (!snapshot.exists) {
-  // const { email } = HospitalAuth;
-  // const createdAt = new Date();
 
   try {
     await userRef.set({
@@ -99,16 +83,12 @@ export const createAppointment = async (
       Specialisation: specialisation,
       Date: date,
       Time: time,
-      // ...additionalData
     });
   } catch (err) {
     console.log("Error while creating User ", error.message);
   }
-  // }
   i += 1;
   return userRef;
 };
-
-//appointment handle approve
 
 export default Firebase;
